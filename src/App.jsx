@@ -15,5 +15,3 @@ const App = () => {
 };
 
 export default App;
-
-//TODO make createClient() .env variables work
