@@ -1,9 +1,19 @@
-function App() {
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Success from "./pages/successPage";
+import Login from "./pages/loginPage";
+
+const App = () => {
   return (
-    <>
-      <div>Hello World</div>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/success" element={<Success />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
+
+//TODO make createClient() .env variables work
