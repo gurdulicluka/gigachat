@@ -8,8 +8,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_IN") {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (event == "SIGNED_IN") {
+        console.log("SIGNED_IN", session);
         navigate("/success");
       } else {
         navigate("/");
@@ -18,11 +19,11 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="w-[95%] mx-auto max-w-[700px] h-screen flex items-center justify-center">
+    <div className="flex items-center justify-center h-screen mx-auto">
       <Auth
         supabaseClient={supabase}
         theme="dark"
-        providers={["discord", "google", "github"]}
+        providers={["discord", "google"]}
         appearance={{ theme: ThemeSupa }}
       />
     </div>
