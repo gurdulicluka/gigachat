@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "../lib/helper/supabaseClient";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Success = () => {
   const [user, setUser] = useState({});
@@ -19,7 +19,7 @@ const Success = () => {
   }, []);
 
   async function signOutUser() {
-    const { error } = await supabase.auth.signOut();
+    const { error: _ }: { error: Error | null } = await supabase.auth.signOut();
     navigate("/");
   }
 
@@ -33,7 +33,7 @@ const Success = () => {
       ) : (
         <>
           <h1>Please log in</h1>
-          <button onClick={() => navigate("/")}>Go Back Home</button>
+          <Link to={"/"}>Login Page</Link>
         </>
       )}
     </div>
