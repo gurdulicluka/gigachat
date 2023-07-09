@@ -1,10 +1,19 @@
 import { Provider } from "@supabase/supabase-js";
 import { supabase } from "../lib/helper/supabaseClient";
 
-export async function signUp(email: string, password: string) {
+export async function signUp(
+  email: string,
+  password: string,
+  username: string
+) {
   const { data, error } = await supabase.auth.signUp({
     email: email,
     password: password,
+    options: {
+      data: {
+        username: username,
+      },
+    },
   });
   if (error) return error;
   return data;
@@ -19,11 +28,6 @@ export async function signIn(email: string, password: string) {
   return data;
 }
 
-export async function signOut() {
-  const { error } = await supabase.auth.signOut();
-  if (error) return error;
-}
-
 export async function signInThirdParty(provider: Provider) {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: provider,
@@ -33,4 +37,9 @@ export async function signInThirdParty(provider: Provider) {
   });
   if (error) return error;
   return data;
+}
+
+export async function signOut() {
+  const { error } = await supabase.auth.signOut();
+  if (error) return error;
 }

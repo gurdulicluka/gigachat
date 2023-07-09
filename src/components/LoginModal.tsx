@@ -1,31 +1,19 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { BsDiscord } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-
-import { supabase } from "../lib/helper/supabaseClient";
-
 import LoginForm from "../components/Forms/LoginForm";
 import ProviderButton from "./ProviderButton";
+import { Dispatch, SetStateAction } from "react";
 
-const LoginModal = () => {
-  const navigate = useNavigate();
+interface Props {
+  setIsMember: Dispatch<SetStateAction<boolean>>;
+}
 
-  useEffect(() => {
-    supabase.auth.onAuthStateChange((event) => {
-      if (event == "SIGNED_IN") {
-        navigate("/success");
-      } else {
-        navigate("/");
-      }
-    });
-  }, []);
-
+const LoginModal = ({ setIsMember }: Props) => {
   return (
     <div className="w-[475px] bg-base-100 p-6 rounded-xl shadow-lg">
       <div className="mb-6 text-center">
         <h1 className="mb-2 text-2xl font-semibold ">Welcome</h1>
-        <h2 className="text-lg">Please enter your details to sign in.</h2>
+        <h2 className="text-md">Please enter your details to sign in.</h2>
       </div>
       <div className="flex gap-2 [&>button]:flex-1">
         <ProviderButton icon={FcGoogle} provider="google" />
@@ -35,10 +23,12 @@ const LoginModal = () => {
       <LoginForm />
       {/* TODO forgot password? */}
       <div className="mt-4 text-sm text-center">
-        Don't have an account?{" "}
-        <span className="font-semibold link text-secondary">
+        <span>Don't have an account?</span>
+        <button
+          onClick={() => setIsMember(false)}
+          className="ml-2 font-semibold link text-secondary">
           Create account
-        </span>
+        </button>
       </div>
     </div>
   );
