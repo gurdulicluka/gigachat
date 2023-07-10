@@ -1,7 +1,7 @@
 import { BsDiscord } from "react-icons/bs";
 import { FcGoogle } from "react-icons/fc";
-import LoginForm from "../components/Forms/LoginForm";
-import ProviderButton from "./ProviderButton";
+import LoginForm from "../Form/LoginForm";
+import ProviderButton from "../ProviderButton";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {

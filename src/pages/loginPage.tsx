@@ -1,5 +1,5 @@
-import LoginModal from "../components/LoginModal";
-import SignUpModal from "../components/SignUpModal";
+import LoginModal from "../components/Modal/LoginModal";
+import SignUpModal from "../components/Modal/SignUpModal";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/helper/supabaseClient";

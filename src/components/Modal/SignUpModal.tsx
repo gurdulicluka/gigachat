@@ -1,4 +1,4 @@
-import SignUpForm from "./Forms/SignUpForm";
+import SignUpForm from "../Form/SignUpForm";
 import { Dispatch, SetStateAction } from "react";
 
 interface Props {
