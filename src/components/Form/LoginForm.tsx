@@ -1,9 +1,11 @@
 import * as Form from "@radix-ui/react-form";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { signIn } from "../../api/auth";
 import { toast, Slide } from "react-toastify";
+import ShowPasswordBtn from "../ShowPasswordBtn";
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -51,16 +53,20 @@ const LoginForm = () => {
       <Form.Field className="relative flex flex-col" name="Password">
         <Form.Label>
           <Form.Control
-            className="input bg-base-100 input-bordered data-[invalid]:input-error w-full"
+            className="input bg-base-100 pr-16 input-bordered data-[invalid]:input-error w-full"
             asChild>
             <input
               ref={passwordRef}
               placeholder="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               required
             />
           </Form.Control>
         </Form.Label>
+        <ShowPasswordBtn
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
         <Form.Message
           className="absolute text-sm text-error -bottom-[1.5rem]"
           match="valueMissing">

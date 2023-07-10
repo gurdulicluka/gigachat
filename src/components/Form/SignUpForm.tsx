@@ -1,9 +1,11 @@
 import * as Form from "@radix-ui/react-form";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { signUp } from "../../api/auth";
 import { toast, Slide } from "react-toastify";
+import ShowPasswordBtn from "../ShowPasswordBtn";
 
 const SignUpForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -79,12 +81,16 @@ const SignUpForm = () => {
             <input
               ref={passwordRef}
               placeholder="Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               minLength={6}
               required
             />
           </Form.Control>
         </Form.Label>
+        <ShowPasswordBtn
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        />
         <Form.Message
           className="absolute text-sm text-error -bottom-[1.5rem]"
           match="valueMissing">
