@@ -1,6 +1,7 @@
 import * as Form from "@radix-ui/react-form";
 import { useRef } from "react";
 import { signIn } from "../../api/auth";
+import { toast, Slide } from "react-toastify";
 
 const LoginForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -10,7 +11,13 @@ const LoginForm = () => {
     event.preventDefault();
     const email = emailRef.current!?.value;
     const password = passwordRef.current!?.value;
-    signIn(email, password);
+    signIn(email, password).then((response) => {
+      if ("error" in response) {
+        toast.error(response.error, {
+          transition: Slide,
+        });
+      }
+    });
   };
   return (
     <Form.Root onSubmit={handleSubmit} className="flex flex-col gap-10">

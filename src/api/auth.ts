@@ -15,7 +15,7 @@ export async function signUp(
       },
     },
   });
-  if (error) return error;
+  if (error) return { error: "User already registered" };
   return data;
 }
 
@@ -24,7 +24,7 @@ export async function signIn(email: string, password: string) {
     email: email,
     password: password,
   });
-  if (error) return error;
+  if (error) return { error: "Invalid login credentials" };
   return data;
 }
 
