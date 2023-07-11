@@ -1,46 +1,42 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/helper/supabaseClient";
 import { signOut } from "../api/auth";
 
 const Success = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState({});
+  const [authorizing, setAuthorizing] = useState(true);
 
   useEffect(() => {
-    async function getUserData() {
-      await supabase.auth.getUser().then((value) => {
-        if (value.data?.user) {
-          setUser(value.data.user);
-        }
-      });
-    }
-    getUserData();
+    supabase.auth.getSession().then((response) => {
+      if (!response.data.session) {
+        navigate("/");
+      } else {
+        setAuthorizing(false);
+      }
+    });
   }, []);
 
-  async function signOutUser() {
-    const response = await signOut();
-    if (response) {
-      console.log("Something went wrong", response);
-    }
-    navigate("/");
+  function signOutUser() {
+    signOut().then((response) => {
+      if (response) {
+      } else {
+        navigate("/");
+      }
+    });
   }
 
   return (
     <div className="text-white bg-black">
-      {Object.keys(user).length !== 0 ? (
+      {/* TODO Don't show authorizing loader when already authorized on page refresh */}
+      {authorizing ? (
+        <div>Authorizing...</div>
+      ) : (
         <>
           <span>You are logged in!</span>
           <button className="btn" onClick={() => signOutUser()}>
             Sign Out
           </button>
-        </>
-      ) : (
-        <>
-          <h1>Please log in</h1>
-          <Link className="btn" to={"/"}>
-            Login Page
-          </Link>
         </>
       )}
     </div>

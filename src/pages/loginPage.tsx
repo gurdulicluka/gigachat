@@ -9,8 +9,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // if session active --> redirect to protected route
+    supabase.auth.getSession().then((response) => {
+      response.data.session && navigate("/");
+    });
+    // listen to auth events
     supabase.auth.onAuthStateChange(async (event) => {
-      console.log(event);
       if (event == "SIGNED_IN") {
         navigate("/success");
       } else {
@@ -20,7 +24,7 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-center h-screen mx-auto">
+    <div className="flex items-center justify-center h-[100svh] mx-auto">
       {isMember ? (
         <LoginModal setIsMember={setIsMember} />
       ) : (
