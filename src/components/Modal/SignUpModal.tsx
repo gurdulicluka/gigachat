@@ -7,7 +7,7 @@ interface Props {
 
 const SignUpModal = ({ setIsMember }: Props) => {
   return (
-    <div className="w-[475px] bg-base-100 p-6 rounded-xl shadow-lg">
+    <div className="max-w-[475px] w-screen bg-base-100 p-6 rounded-xl shadow-lg">
       <div className="mb-6 text-center">
         <h1 className="mb-2 text-2xl font-semibold ">Register</h1>
         <h2 className="text-md">Please fill in the form fields to register</h2>
