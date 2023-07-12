@@ -25,7 +25,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <Form.Root onSubmit={handleSubmit} className="flex flex-col gap-10">
+    <Form.Root onSubmit={handleSubmit} className="flex flex-col gap-8">
       {/* Email */}
       <Form.Field className="relative flex flex-col" name="email">
         <Form.Label>
