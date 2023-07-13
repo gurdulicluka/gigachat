@@ -9,17 +9,18 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // if session active --> redirect to protected route
+    console.log("useEffect LOGIN PAGE");
+    // if session active -> redirect to protected route
     supabase.auth.getSession().then((response) => {
-      response.data.session && navigate("/");
-    });
-    // listen to auth events
-    supabase.auth.onAuthStateChange(async (event) => {
-      if (event == "SIGNED_IN") {
+      if (response.data.session) {
+        console.log("Already logged in, redirecting..");
         navigate("/success");
-      } else {
-        navigate("/");
       }
+    });
+    // if user logs in successfully -> redirect to protected route
+    supabase.auth.onAuthStateChange(async (event) => {
+      console.log("Auth event is", event);
+      event === "SIGNED_IN" && navigate("/success");
     });
   }, []);
 

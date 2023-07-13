@@ -8,9 +8,11 @@ const Success = () => {
   const [authorizing, setAuthorizing] = useState(true);
 
   useEffect(() => {
+    console.log("useEffect SUCCESS PAGE");
     supabase.auth.getSession().then((response) => {
       if (!response.data.session) {
         navigate("/");
+        console.log("Unauthorized, redirecting to login page..");
       } else {
         setAuthorizing(false);
       }
@@ -18,8 +20,9 @@ const Success = () => {
   }, []);
 
   function signOutUser() {
-    signOut().then((response) => {
-      if (response) {
+    signOut().then((error) => {
+      if (error) {
+        console.log(error);
       } else {
         navigate("/");
       }
