@@ -1,7 +1,7 @@
 import { Provider } from "@supabase/supabase-js";
 import { supabase } from "../lib/helper/supabaseClient";
 
-export async function signUp(
+export async function createAccount(
   email: string,
   password: string,
   username: string

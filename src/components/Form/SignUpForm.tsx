@@ -1,6 +1,6 @@
 import * as Form from "@radix-ui/react-form";
 import { useRef, useState } from "react";
-import { signUp } from "../../api/auth";
+import { createAccount } from "../../api/auth";
 import { toast, Slide } from "react-toastify";
 import ShowPasswordBtn from "../ShowPasswordBtn";
 
@@ -15,7 +15,8 @@ const SignUpForm = () => {
     const username = usernameRef.current!?.value;
     const email = emailRef.current!?.value;
     const password = passwordRef.current!?.value;
-    signUp(email, password, username).then((response) => {
+    createAccount(email, password, username).then((response) => {
+      console.log(response);
       if ("error" in response) {
         toast.error(response.error, {
           transition: Slide,
