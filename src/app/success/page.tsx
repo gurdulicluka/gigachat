@@ -1,17 +1,18 @@
+"use client";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "../lib/helper/supabaseClient";
-import { signOut } from "../api/auth";
+import { supabase } from "../../lib/supabaseClient";
+import { signOut } from "../../lib/auth";
+import { useRouter } from "next/navigation";
 
-const Success = () => {
-  const navigate = useNavigate();
+export default function Success() {
+  const router = useRouter();
   const [authorizing, setAuthorizing] = useState(true);
 
   useEffect(() => {
     console.log("useEffect SUCCESS PAGE");
     supabase.auth.getSession().then((response) => {
       if (!response.data.session) {
-        navigate("/");
+        router.push("/");
         console.log("Unauthorized, redirecting to login page..");
       } else {
         setAuthorizing(false);
@@ -24,7 +25,7 @@ const Success = () => {
       if (error) {
         console.log(error);
       } else {
-        navigate("/");
+        router.push("/");
       }
     });
   }
@@ -44,6 +45,4 @@ const Success = () => {
       )}
     </div>
   );
-};
-
-export default Success;
+}

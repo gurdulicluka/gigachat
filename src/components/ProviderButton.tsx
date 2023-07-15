@@ -1,4 +1,4 @@
-import { signInThirdParty } from "../api/auth";
+import { signInThirdParty } from "../lib/auth";
 import { IconType } from "react-icons";
 import { Provider } from "@supabase/supabase-js";
 

@@ -1,6 +1,6 @@
 import * as Form from "@radix-ui/react-form";
 import { useRef, useState } from "react";
-import { signIn } from "../../api/auth";
+import { signIn } from "../../lib/auth";
 import { toast, Slide } from "react-toastify";
 import ShowPasswordBtn from "../ShowPasswordBtn";
 

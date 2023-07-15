@@ -12,7 +12,7 @@ const LoginModal = ({ setIsMember }: Props) => {
   return (
     <div className="max-w-[475px] w-screen bg-base-100 p-6 rounded-xl shadow-lg">
       <div className="mb-6 text-center">
-        <h1 className="mb-2 text-2xl font-semibold ">Welcome</h1>
+        <h1 className="mb-2 text-2xl font-semibold">Welcome</h1>
         <h2 className="text-md">Please enter your details to sign in.</h2>
       </div>
       <div className="flex gap-2 [&>button]:flex-1">
