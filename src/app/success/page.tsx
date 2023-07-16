@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { signOut } from "../../lib/auth";
@@ -30,6 +31,12 @@ export default function Success() {
     });
   }
 
+  async function createProfile() {
+    const res = await axios.get("/api/profile/Admin").then((response) => {
+      console.log(response);
+    });
+  }
+
   return (
     <div className="text-white bg-black">
       {/* TODO Don't show authorizing loader when already authorized on page refresh */}
@@ -41,6 +48,7 @@ export default function Success() {
           <button className="btn" onClick={() => signOutUser()}>
             Sign Out
           </button>
+          <button onClick={createProfile}>Make Profile</button>
         </>
       )}
     </div>
