@@ -18,9 +18,12 @@ const LoginForm = () => {
         toast.error(response.error, {
           transition: Slide,
         });
+      } else {
+        console.log(response);
       }
     });
   };
+
   return (
     <Form.Root onSubmit={handleSubmit} className="flex flex-col gap-8">
       {/* Email */}

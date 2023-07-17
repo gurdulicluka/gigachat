@@ -31,24 +31,42 @@ export default function Success() {
     });
   }
 
-  async function createProfile() {
+  async function retrieveSession() {
+    const { data, error } = await supabase.auth.getSession();
+    if (error) console.log("Error", error);
+    else {
+      console.log("Here is your session", data);
+      console.log("Expires at:", new Date(data.session?.expires_at! * 1000));
+    }
+  }
+
+  async function getProfile() {
     const res = await axios.get("/api/profile/Admin").then((response) => {
       console.log(response);
     });
   }
 
   return (
-    <div className="text-white bg-black">
+    <div className="flex items-center justify-center h-screen bg-gray-900">
       {/* TODO Don't show authorizing loader when already authorized on page refresh */}
       {authorizing ? (
         <div>Authorizing...</div>
       ) : (
         <>
-          <span>You are logged in!</span>
-          <button className="btn" onClick={() => signOutUser()}>
-            Sign Out
-          </button>
-          <button onClick={createProfile}>Make Profile</button>
+          <div className="flex flex-col items-center gap-3">
+            <h1 className="mb-5 text-6xl font-bold text-white">
+              You are logged in!
+            </h1>
+            <button className="w-1/2 btn" onClick={() => signOutUser()}>
+              Sign Out
+            </button>
+            <button className="w-1/2 btn" onClick={getProfile}>
+              Fetch Profile
+            </button>
+            <button className="w-1/2 btn" onClick={retrieveSession}>
+              Get Session
+            </button>
+          </div>
         </>
       )}
     </div>
