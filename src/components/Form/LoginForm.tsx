@@ -11,11 +11,13 @@ const LoginForm = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
     const email = emailRef.current!?.value;
     const password = passwordRef.current!?.value;
+
     signIn(email, password).then((response) => {
       if ("error" in response) {
-        toast.error(response.error, {
+        toast.error(response.error.toString(), {
           transition: Slide,
         });
       } else {

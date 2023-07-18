@@ -12,13 +12,15 @@ const SignUpForm = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
     const username = usernameRef.current!?.value;
     const email = emailRef.current!?.value;
     const password = passwordRef.current!?.value;
-    createAccount(email, password, username).then((response) => {
+
+    createAccount(email, password, username).then((response: any) => {
       console.log(response);
       if ("error" in response) {
-        toast.error(response.error, {
+        toast.error(response.error.toString(), {
           transition: Slide,
         });
       }
