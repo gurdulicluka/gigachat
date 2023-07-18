@@ -22,7 +22,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
+        <main>{children}</main>
         <ToastContainer
           position="top-center"
           autoClose={2000}
