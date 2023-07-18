@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import { signOut } from "../../lib/auth";
@@ -40,15 +39,8 @@ export default function Success() {
     }
   }
 
-  async function getProfile() {
-    const res = await axios.get("/api/profile/Admin").then((response) => {
-      console.log(response);
-    });
-  }
-
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
-      {/* TODO Don't show authorizing loader when already authorized on page refresh */}
+    <div className="flex items-center justify-center h-screen">
       {authorizing ? (
         <div>Authorizing...</div>
       ) : (
@@ -59,9 +51,6 @@ export default function Success() {
             </h1>
             <button className="w-1/2 btn" onClick={() => signOutUser()}>
               Sign Out
-            </button>
-            <button className="w-1/2 btn" onClick={getProfile}>
-              Fetch Profile
             </button>
             <button className="w-1/2 btn" onClick={retrieveSession}>
               Get Session
